@@ -10,7 +10,7 @@ class WordsCounterDisk {
     /**
      * @var int
      */
-    protected $chunksCount = 10;
+    protected $chunksCount = DB_CHUNKS_COUNT;
 
     /**
      * @var string
@@ -33,23 +33,32 @@ class WordsCounterDisk {
     protected $KeyMapper = null;
 
     /**
-     * @param string $word
-     * @param int $count
+     * @param array $wordsAndCounters
      */
-    public function addWord($word, $count) {
-        $FileDB = $this->getDbForWord($word);
-        $FileDB->load();
-        $FileDB->increment($word, $count);
-        $FileDB->save();
-    }
+    public function addWords($wordsAndCounters) {
+        // Group words by chunk
+        $wordsChunks = [];
+        foreach ($wordsAndCounters as $word => $counter) {
+            $chunk = $this->getChunkForWord($word);
+            if (!array_key_exists($chunk, $wordsChunks)) {
+                $wordsChunks[$chunk] = [];
+            }
 
-    /**
-     * @param string $word
-     * @return FileDB
-     */
-    protected function getDbForWord($word) {
-        $chunk = $this->getChunkForWord($word);
-        return $this->getDbForChunk($chunk);
+            $wordsChunks[$chunk][$word] = $counter;
+        }
+
+        // Save words pack to file
+        foreach ($wordsChunks as $chunk => $words) {
+            $Db = $this->getDbForChunk($chunk);
+            $Db->load();
+
+            foreach ($words as $word => $counter) {
+                $Db->increment($word, $counter);
+            }
+
+            $Db->save();
+            unset($Db);
+        }
     }
 
     /**
@@ -111,9 +120,5 @@ class WordsCounterDisk {
 
             unset($FileDB);
         }
-    }
-
-    public function addWords($getWordsCounters) {
-        // группировка
     }
 }

@@ -7,7 +7,7 @@ class WordsCounterMemory {
     /**
      * @var int
      */
-    protected $maxWordsInMemory = 100;
+    protected $maxWordsInMemory = MAX_WORDS_IN_MEMORY;
 
     /**
      * @var array
@@ -41,7 +41,7 @@ class WordsCounterMemory {
     /**
      * @return array
      */
-    public function getWordsCounters() {
+    public function getWordsWithCounters() {
         return $this->wordsCounters;
     }
 

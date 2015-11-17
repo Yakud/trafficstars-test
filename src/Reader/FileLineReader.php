@@ -1,7 +1,6 @@
 <?php
 namespace Reader;
 
-
 use Exception;
 use Generator;
 use LogicException;
@@ -83,20 +82,5 @@ class FileLineReader {
         }
 
         return fgets($this->FileContext);
-    }
-
-    /**
-     * @param string $fileName
-     */
-    public function setFileName($fileName) {
-        $this->fileName = $fileName;
-    }
-
-    /**
-     * @param string $data
-     */
-    public function write($data) {
-        fputs($this->FileContext, $data);
-//        fwrite($this->FileContext, $data);
     }
 }
