@@ -4,11 +4,6 @@ namespace Parser;
 
 class WordsMiner {
     /**
-     * @var int
-     */
-    protected $minimumSymbolsWords = 1;
-
-    /**
      * @param string $line
      * @return array
      */
