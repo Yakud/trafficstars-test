@@ -2,7 +2,7 @@
 namespace Parser;
 
 
-class Tokenizer {
+class WordsMiner {
     /**
      * @var int
      */
