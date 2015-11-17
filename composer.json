@@ -1,0 +1,15 @@
+{
+    "name": "yakud/test",
+    "authors": [
+        {
+            "name": "Aleksey Kiselev",
+            "email": "yakudgm@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload" : {
+        "classmap" : [
+            "src/"
+        ]
+    }
+}
