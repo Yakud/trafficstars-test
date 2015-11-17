@@ -25,7 +25,7 @@ class WordsCounterMemory {
     public function addWord($word) {
         if (!$this->isWordExists($word)) {
             if ($this->getNumberWords() >= $this->maxWordsInMemory) {
-                throw new OutOfMemoryException('Out of memory for words memory counters. Maximum ' . $this->maxWordsInMemory . ' words.');
+                throw new OutOfMemoryException('Out of memory for words counters. Maximum ' . $this->maxWordsInMemory . ' words.');
             }
         }
 
