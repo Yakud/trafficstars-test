@@ -6,9 +6,19 @@ use Utils\ArrayUtils;
 use Utils\FSUtils;
 
 class FileDB {
+    /**
+     * @var array
+     */
     protected $data = [];
 
+    /**
+     * @var string
+     */
     protected $dbName = '';
+
+    /**
+     * @var string
+     */
     protected $dbPath = '';
 
     /**
@@ -22,6 +32,7 @@ class FileDB {
     }
 
     /**
+     * Get database data
      * @return array
      */
     public function getData() {
@@ -29,6 +40,7 @@ class FileDB {
     }
 
     /**
+     * Get value by key
      * @param string $key
      * @param int $default
      * @return mixed
@@ -56,7 +68,7 @@ class FileDB {
     }
 
     /**
-     * Load data in memory
+     * Load data from file to memory
      * @return bool
      */
     public function load() {
@@ -74,7 +86,7 @@ class FileDB {
     }
 
     /**
-     * Save db on disk
+     * Save data on disk
      * @return void
      */
     public function save() {
@@ -84,6 +96,7 @@ class FileDB {
 
 
     /**
+     * Init database. Create folder and file
      * @return void
      */
     protected function init() {
@@ -95,6 +108,7 @@ class FileDB {
     }
 
     /**
+     * Get full path to database file
      * @return string
      */
     protected function getPathFull() {
@@ -102,6 +116,7 @@ class FileDB {
     }
 
     /**
+     * Get database folder
      * @return string
      */
     protected function getPathFolder() {

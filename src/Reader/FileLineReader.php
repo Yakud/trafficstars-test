@@ -7,11 +7,13 @@ use LogicException;
 
 class FileLineReader {
     /**
+     * Filename path
      * @var string
      */
     protected $fileName = '';
 
     /**
+     * Open file context
      * @var resource
      */
     protected $FileContext = null;
@@ -28,6 +30,7 @@ class FileLineReader {
     }
 
     /**
+     * Open file and save context
      * @param string $fileOpenMode
      * @return bool
      * @throws Exception
@@ -48,6 +51,7 @@ class FileLineReader {
     }
 
     /**
+     * Close file by context
      * @return bool
      * @throws Exception
      */
@@ -63,6 +67,7 @@ class FileLineReader {
     }
 
     /**
+     * Read line from file to Generator
      * @return Generator
      * @throws Exception
      */
@@ -73,6 +78,7 @@ class FileLineReader {
     }
 
     /**
+     * Read line from file
      * @return string
      * @throws LogicException
      */

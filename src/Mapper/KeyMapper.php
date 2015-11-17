@@ -4,19 +4,17 @@ namespace Mapper;
 
 class KeyMapper {
     /**
+     * Generate chunk index by string
      * @param string $key
      * @param int $countChunks
      * @return int
      */
     public function getForKey($key, $countChunks) {
-        $index = $this->getNumericHash($key) % $countChunks;
-
-        return $index;
+        return $this->getNumericHash($key) % $countChunks;
     }
 
     /**
      * Get number from string
-     *
      * @param string $key
      * @return int
      */

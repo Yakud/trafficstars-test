@@ -5,23 +5,26 @@ use Utils\ArrayUtils;
 
 class WordsCounterMemory {
     /**
+     * Maximum count words counters in memory
      * @var int
      */
     protected $maxWordsInMemory = MAX_WORDS_IN_MEMORY;
 
     /**
+     * Words counters
      * @var array
      */
     protected $wordsCounters = [];
 
     /**
+     * Add word to memory counters
      * @param string $word
      * @return bool
      * @throws OutOfMemoryException
      */
     public function addWord($word) {
         if (!$this->isWordExists($word)) {
-            if ($this->getCountWords() >= $this->maxWordsInMemory) {
+            if ($this->getNumberWords() >= $this->maxWordsInMemory) {
                 throw new OutOfMemoryException('Out of memory for words memory counters. Maximum ' . $this->maxWordsInMemory . ' words.');
             }
         }
@@ -32,6 +35,7 @@ class WordsCounterMemory {
     }
 
     /**
+     * Clear memory counters
      * @return void
      */
     public function clearCounters() {
@@ -39,6 +43,7 @@ class WordsCounterMemory {
     }
 
     /**
+     * Return words dictionary with counters
      * @return array
      */
     public function getWordsWithCounters() {
@@ -46,6 +51,7 @@ class WordsCounterMemory {
     }
 
     /**
+     * Is word exists in memory
      * @param string $word
      * @return bool
      */
@@ -54,9 +60,10 @@ class WordsCounterMemory {
     }
 
     /**
+     * Get count unique words
      * @return int
      */
-    public function getCountWords() {
+    public function getNumberWords() {
         return sizeof($this->wordsCounters);
     }
 }

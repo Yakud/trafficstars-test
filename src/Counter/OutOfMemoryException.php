@@ -3,6 +3,4 @@ namespace Counter;
 
 use Exception;
 
-class OutOfMemoryException extends Exception {
-
-}
+class OutOfMemoryException extends Exception { }

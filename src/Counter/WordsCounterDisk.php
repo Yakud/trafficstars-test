@@ -8,31 +8,37 @@ use Reader\FileLineReader;
 
 class WordsCounterDisk {
     /**
+     * Count of words chunks
      * @var int
      */
     protected $chunksCount = DB_CHUNKS_COUNT;
 
     /**
+     * Path to words temp directory
      * @var string
      */
     protected $tempDirectory = PATH_TEMP;
 
     /**
+     * Filename with words chunk
      * @var string
      */
     protected $chunkFilename = 'chunk.data';
 
     /**
+     * File line reader instance
      * @var FileLineReader
      */
     protected $FileLineReader = null;
 
     /**
+     * Chunk generator
      * @var KeyMapper
      */
     protected $KeyMapper = null;
 
     /**
+     * Add words array to database
      * @param array $wordsAndCounters
      */
     public function addWords($wordsAndCounters) {
@@ -47,7 +53,7 @@ class WordsCounterDisk {
             $wordsChunks[$chunk][$word] = $counter;
         }
 
-        // Save words pack to file
+        // Save pack of words to file
         foreach ($wordsChunks as $chunk => $words) {
             $Db = $this->getDbForChunk($chunk);
             $Db->load();
@@ -62,6 +68,7 @@ class WordsCounterDisk {
     }
 
     /**
+     * Get database for word chunk
      * @param string $chunk
      * @return FileDB
      */
@@ -72,6 +79,7 @@ class WordsCounterDisk {
     }
 
     /**
+     * Get folder path for chunk
      * @param string $chunk
      * @return string
      */
@@ -80,6 +88,7 @@ class WordsCounterDisk {
     }
 
     /**
+     * Get chunk for word
      * @param string $word
      * @return int
      */
@@ -88,6 +97,11 @@ class WordsCounterDisk {
         return $this->getChunkHash($index);
     }
 
+    /**
+     * Get chunk hash
+     * @param string $chunk
+     * @return string
+     */
     protected function getChunkHash($chunk) {
         return substr(sha1($chunk), 0, 8);
     }
@@ -104,6 +118,7 @@ class WordsCounterDisk {
     }
 
     /**
+     * Read each words from each chunk database
      * @return Generator
      */
     public function eachWords() {

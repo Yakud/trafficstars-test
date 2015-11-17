@@ -16,7 +16,6 @@ class ArrayUtils {
 
     /**
      * Set array value by key
-     *
      * @param array $array
      * @param string $key
      * @param $value

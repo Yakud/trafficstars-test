@@ -4,6 +4,7 @@ namespace Parser;
 
 class WordsMiner {
     /**
+     * Get array words from string
      * @param string $line
      * @return array
      */

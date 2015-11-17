@@ -4,6 +4,7 @@ namespace Utils;
 
 class FSUtils {
     /**
+     * Create folder if not exists
      * @param string $folder
      * @return bool
      */
@@ -16,6 +17,7 @@ class FSUtils {
     }
 
     /**
+     * Create file if not exists
      * @param string $filename
      * @return bool
      */
