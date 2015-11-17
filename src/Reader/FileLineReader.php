@@ -10,11 +10,6 @@ class FileLineReader {
     /**
      * @var string
      */
-    protected $fileOpenMode = 'r';
-
-    /**
-     * @var string
-     */
     protected $fileName = '';
 
     /**
@@ -25,7 +20,7 @@ class FileLineReader {
     /**
      * @param string $filename
      */
-    public function __construct($filename) {
+    public function __construct($filename = '') {
         $this->fileName = $filename;
     }
 
@@ -34,17 +29,18 @@ class FileLineReader {
     }
 
     /**
+     * @param string $fileOpenMode
      * @return bool
      * @throws Exception
      */
-    public function openFile() {
+    public function openFile($fileOpenMode = 'r') {
         $this->FileContext = null;
 
         if (!file_exists($this->fileName)) {
             throw new LogicException("Cannot open {$this->fileName}. File not found");
         }
 
-        $this->FileContext = fopen($this->fileName, $this->fileOpenMode);
+        $this->FileContext = fopen($this->fileName, $fileOpenMode);
         if ($this->FileContext === false) {
             throw new Exception("Error open file {$this->fileName}");
         }
@@ -75,10 +71,6 @@ class FileLineReader {
         while (($buffer = $this->readLine()) !== false) {
             yield $buffer;
         }
-
-        if (!feof($this->FileContext)) {
-            throw new Exception('Error: unexpected fgets() fail');
-        }
     }
 
     /**
@@ -91,5 +83,20 @@ class FileLineReader {
         }
 
         return fgets($this->FileContext);
+    }
+
+    /**
+     * @param string $fileName
+     */
+    public function setFileName($fileName) {
+        $this->fileName = $fileName;
+    }
+
+    /**
+     * @param string $data
+     */
+    public function write($data) {
+        fputs($this->FileContext, $data);
+//        fwrite($this->FileContext, $data);
     }
 }
